@@ -33,8 +33,8 @@ Global
 		{668D631E-1765-4377-B87C-0E1DA15AF44D}.Release|x86.Build.0 = Release|x86
 		{1DCF910B-FEAF-48F2-B798-3588685243AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1DCF910B-FEAF-48F2-B798-3588685243AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1DCF910B-FEAF-48F2-B798-3588685243AD}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{1DCF910B-FEAF-48F2-B798-3588685243AD}.Debug|x64.Build.0 = Debug|Any CPU
+		{1DCF910B-FEAF-48F2-B798-3588685243AD}.Debug|x64.ActiveCfg = Debug|x64
+		{1DCF910B-FEAF-48F2-B798-3588685243AD}.Debug|x64.Build.0 = Debug|x64
 		{1DCF910B-FEAF-48F2-B798-3588685243AD}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{1DCF910B-FEAF-48F2-B798-3588685243AD}.Debug|x86.Build.0 = Debug|Any CPU
 		{1DCF910B-FEAF-48F2-B798-3588685243AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -58,5 +58,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CCCE63B0-9A3C-4E7D-83DA-FD0670448BA9}
 	EndGlobalSection
 EndGlobal

@@ -1,4 +1,5 @@
-﻿Imports System.IO
+﻿Imports System.Drawing.Drawing2D
+Imports System.IO
 Imports System.Runtime.InteropServices
 Imports System.Text
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement
@@ -203,7 +204,7 @@ Public Class Form1
 
             ' Mode koneksi:
             ' 0 = TCP, 1 = UDP, 2 = Multicast, 3 = RTP, 4 = RTP/RTSP, 5 = RTSP/HTTP
-            lpPreviewInfo.dwLinkMode = 1
+            lpPreviewInfo.dwLinkMode = 0
 
             ' Mode blocking stream
             ' False = Non-blocking, True = Blocking
@@ -303,10 +304,10 @@ Public Class Form1
 
         ' Parameter JPEG
         Dim lpJpegPara As New MySDK.CHCNetSDK.NET_DVR_JPEGPARA()
-        lpJpegPara.wPicQuality = 0
-        ' Kualitas gambar (0 = terbaik, semakin besar nilainya kualitas semakin rendah)
+        lpJpegPara.wPicQuality = 2
+        ' Kualitas gambar (0 = terbaik, 1 = tinggi, 2 = sedang. semakin besar nilainya kualitas semakin rendah)
 
-        lpJpegPara.wPicSize = &HFF
+        lpJpegPara.wPicSize = &H2
         ' Ukuran gambar:
         ' 2   = 4CIF
         ' &HFF = Otomatis (menggunakan resolusi stream saat ini)
@@ -328,9 +329,21 @@ Public Class Form1
             ' Capture berhasil
             str = "Successful to capture the JPEG file and the saved file is " & sJpegPicFileName
             MessageBox.Show(str)
+            ResizeImage(sJpegPicFileName, "small.jpg")
         End If
 
         Return
+    End Sub
+
+    Sub ResizeImage(src As String, dst As String)
+        Using img = Image.FromFile(src)
+            Dim bmp As New Bitmap(640, 360)
+            Using g = Graphics.FromImage(bmp)
+                g.InterpolationMode = InterpolationMode.HighQualityBicubic
+                g.DrawImage(img, 0, 0, 640, 360)
+            End Using
+            bmp.Save(dst, Imaging.ImageFormat.Jpeg)
+        End Using
     End Sub
 
     Private Sub Btn_Exit_Click(sender As Object, e As EventArgs) Handles Btn_Exit.Click

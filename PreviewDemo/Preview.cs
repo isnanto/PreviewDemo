@@ -681,8 +681,8 @@ namespace PreviewDemo
             int lChannel = Int16.Parse(textBoxChannel.Text); //通道号 Channel number
 
             CHCNetSDK.NET_DVR_JPEGPARA lpJpegPara = new CHCNetSDK.NET_DVR_JPEGPARA();
-            lpJpegPara.wPicQuality = 0; //图像质量 Image quality
-            lpJpegPara.wPicSize = 0xff; //抓图分辨率 Picture size: 2- 4CIF，0xff- Auto(使用当前码流分辨率)，抓图分辨率需要设备支持，更多取值请参考SDK文档
+            lpJpegPara.wPicQuality = 2; //图像质量 Image quality
+            lpJpegPara.wPicSize = 1;//0xff; //抓图分辨率 Picture size: 2- 4CIF，0xff- Auto(使用当前码流分辨率)，抓图分辨率需要设备支持，更多取值请参考SDK文档
 
             //JPEG抓图 Capture a JPEG picture
             if (!CHCNetSDK.NET_DVR_CaptureJPEGPicture(m_lUserID, lChannel, ref lpJpegPara, sJpegPicFileName))
