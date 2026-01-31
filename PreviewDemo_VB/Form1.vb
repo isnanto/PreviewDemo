@@ -1,5 +1,6 @@
 ﻿Imports System.Drawing.Drawing2D
 Imports System.IO
+Imports System.Runtime.CompilerServices.RuntimeHelpers
 Imports System.Runtime.InteropServices
 Imports System.Text
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement
@@ -94,7 +95,7 @@ Public Class Form1
             If m_lUserID < 0 Then
                 ' Login gagal, ambil kode error
                 iLastErr = MySDK.CHCNetSDK.NET_DVR_GetLastError()
-                str = "NET_DVR_Login_V30 failed, error code= " & iLastErr
+                str = "NET_DVR_Login_V30 failed, error code= " & iLastErr & vbCrLf & Marshal.PtrToStringAnsi(MySDK.CHCNetSDK.NET_DVR_GetErrorMsg(iLastErr))
                 MessageBox.Show(str)
                 Return
             Else
@@ -115,7 +116,7 @@ Public Class Form1
             ' Proses logout
             If Not MySDK.CHCNetSDK.NET_DVR_Logout(m_lUserID) Then
                 iLastErr = MySDK.CHCNetSDK.NET_DVR_GetLastError()
-                str = "NET_DVR_Logout failed, error code= " & iLastErr
+                str = "NET_DVR_Logout failed, error code= " & iLastErr & vbCrLf & Marshal.PtrToStringAnsi(MySDK.CHCNetSDK.NET_DVR_GetErrorMsg(iLastErr))
                 MessageBox.Show(str)
                 Return
             End If
@@ -239,7 +240,9 @@ Public Class Form1
             If m_lRealHandle < 0 Then
                 ' Live view gagal
                 iLastErr = MySDK.CHCNetSDK.NET_DVR_GetLastError()
-                str = "NET_DVR_RealPlay_V40 failed, error code= " & iLastErr
+                str = "NET_DVR_RealPlay_V40 failed, error code= " & iLastErr & vbCrLf & Marshal.PtrToStringAnsi(MySDK.CHCNetSDK.NET_DVR_GetErrorMsg(iLastErr))
+
+
                 MessageBox.Show(str)
                 Return
             Else
@@ -322,8 +325,13 @@ Public Class Form1
 
             ' Capture gagal
             iLastErr = MySDK.CHCNetSDK.NET_DVR_GetLastError()
-            str = "NET_DVR_CaptureJPEGPicture failed, error code= " & iLastErr
-            MessageBox.Show(str)
+            str = "NET_DVR_CaptureJPEGPicture failed, error code= " & iLastErr & vbCrLf & Marshal.PtrToStringAnsi(MySDK.CHCNetSDK.NET_DVR_GetErrorMsg(iLastErr))
+
+            'Dim pMsg As IntPtr = MySDK.CHCNetSDK.NET_DVR_GetErrorMsg(iLastErr)
+            'Dim errMsg As String = Marshal.PtrToStringAnsi(pMsg)
+            'str = errMsg
+
+            MessageBox.Show(str, "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Return
         Else
             ' Capture berhasil
