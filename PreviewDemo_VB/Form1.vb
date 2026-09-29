@@ -42,6 +42,8 @@ Public Class Form1
     'Menyimpan konfigurasi posisi PTZ (Pan, Tilt, Zoom)
     Public m_struPtzCfg As MySDK.CHCNetSDK.NET_DVR_PTZPOS
 
+    Private m_plateRecognizer As MySDK.LicensePlateRecognizer = Nothing
+
     Public Sub New()
         '
         ' Kode yang diperlukan dan didukung oleh Windows Form Designer
@@ -49,9 +51,13 @@ Public Class Form1
         InitializeComponent()
 
         '
-        ' TODO: Tambahkan kode inisialisasi lain setelah pemanggilan InitializeComponent
+        ' Inisialisasi engine pembaca plat nomor
         '
-
+        Try
+            m_plateRecognizer = New MySDK.LicensePlateRecognizer()
+        Catch ex As Exception
+            ' Biarkan null jika model belum siap saat start
+        End Try
 
     End Sub
 
@@ -338,6 +344,9 @@ Public Class Form1
             str = "Successful to capture the JPEG file and the saved file is " & sJpegPicFileName
             MessageBox.Show(str)
             ResizeImage(sJpegPicFileName, "small.jpg")
+
+            ' Jalankan pengenalan plat nomor dari file snapshot
+            RecognizePlateFromSnapshot(sJpegPicFileName)
         End If
 
         Return
@@ -352,6 +361,38 @@ Public Class Form1
             End Using
             bmp.Save(dst, Imaging.ImageFormat.Jpeg)
         End Using
+    End Sub
+
+    Private Sub RecognizePlateFromSnapshot(filePath As String)
+        Try
+            If m_plateRecognizer Is Nothing Then
+                m_plateRecognizer = New MySDK.LicensePlateRecognizer()
+            End If
+
+            Dim result = m_plateRecognizer.ProcessImage(filePath)
+            If result.Success Then
+                TxtPlateNumber.Text = result.PlateNumber
+                If result.CroppedPlate IsNot Nothing Then
+                    If PicPlateCrop.Image IsNot Nothing Then
+                        PicPlateCrop.Image.Dispose()
+                    End If
+                    PicPlateCrop.Image = New Bitmap(result.CroppedPlate)
+                End If
+            Else
+                TxtPlateNumber.Text = If(String.IsNullOrEmpty(result.PlateNumber), "TIDAK TERBACA", result.PlateNumber)
+                If result.CroppedPlate IsNot Nothing Then
+                    If PicPlateCrop.Image IsNot Nothing Then
+                        PicPlateCrop.Image.Dispose()
+                    End If
+                    PicPlateCrop.Image = New Bitmap(result.CroppedPlate)
+                End If
+                If Not String.IsNullOrEmpty(result.ErrorMessage) Then
+                    MessageBox.Show(result.ErrorMessage, "ALPR Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                End If
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Gagal memproses plat nomor: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub Btn_Exit_Click(sender As Object, e As EventArgs) Handles Btn_Exit.Click

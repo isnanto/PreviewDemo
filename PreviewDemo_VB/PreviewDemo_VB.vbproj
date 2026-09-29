@@ -147,5 +147,35 @@
       <Name>MySDK</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\models\license_plate_yolov8n.onnx">
+      <Link>models\license_plate_yolov8n.onnx</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\tessdata\eng.traineddata">
+      <Link>tessdata\eng.traineddata</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\packages\Tesseract.4.1.1\x86\leptonica-1.80.0.dll">
+      <Link>x86\leptonica-1.80.0.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\packages\Tesseract.4.1.1\x86\tesseract41.dll">
+      <Link>x86\tesseract41.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\packages\Tesseract.4.1.1\x64\leptonica-1.80.0.dll">
+      <Link>x64\leptonica-1.80.0.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\packages\Tesseract.4.1.1\x64\tesseract41.dll">
+      <Link>x64\tesseract41.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\packages\Microsoft.ML.OnnxRuntime.1.19.2\runtimes\win-x86\native\onnxruntime.dll">
+      <Link>onnxruntime.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

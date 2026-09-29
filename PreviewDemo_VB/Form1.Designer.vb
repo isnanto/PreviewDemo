@@ -57,6 +57,9 @@ Partial Class Form1
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.LabelPlate = New System.Windows.Forms.Label()
+        Me.TxtPlateNumber = New System.Windows.Forms.TextBox()
+        Me.PicPlateCrop = New System.Windows.Forms.PictureBox()
         Me.textBoxID = New System.Windows.Forms.TextBox()
         Me.textBoxChannel = New System.Windows.Forms.TextBox()
         Me.TxtPort = New System.Windows.Forms.TextBox()
@@ -114,6 +117,9 @@ Partial Class Form1
         Me.Panel2.Controls.Add(Me.Label4)
         Me.Panel2.Controls.Add(Me.Label3)
         Me.Panel2.Controls.Add(Me.Label1)
+        Me.Panel2.Controls.Add(Me.LabelPlate)
+        Me.Panel2.Controls.Add(Me.TxtPlateNumber)
+        Me.Panel2.Controls.Add(Me.PicPlateCrop)
         Me.Panel2.Controls.Add(Me.textBoxID)
         Me.Panel2.Controls.Add(Me.textBoxChannel)
         Me.Panel2.Controls.Add(Me.TxtPort)
@@ -216,6 +222,39 @@ Partial Class Form1
         Me.Label3.TabIndex = 1
         Me.Label3.Text = "User ID"
         '
+        'LabelPlate
+        '
+        Me.LabelPlate.AutoSize = True
+        Me.LabelPlate.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelPlate.ForeColor = System.Drawing.Color.DarkBlue
+        Me.LabelPlate.Location = New System.Drawing.Point(300, 126)
+        Me.LabelPlate.Name = "LabelPlate"
+        Me.LabelPlate.Size = New System.Drawing.Size(89, 20)
+        Me.LabelPlate.TabIndex = 6
+        Me.LabelPlate.Text = "Plat Nomor:"
+        '
+        'TxtPlateNumber
+        '
+        Me.TxtPlateNumber.BackColor = System.Drawing.Color.LemonChiffon
+        Me.TxtPlateNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtPlateNumber.ForeColor = System.Drawing.Color.Black
+        Me.TxtPlateNumber.Location = New System.Drawing.Point(400, 122)
+        Me.TxtPlateNumber.Name = "TxtPlateNumber"
+        Me.TxtPlateNumber.ReadOnly = True
+        Me.TxtPlateNumber.Size = New System.Drawing.Size(210, 29)
+        Me.TxtPlateNumber.TabIndex = 7
+        Me.TxtPlateNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'PicPlateCrop
+        '
+        Me.PicPlateCrop.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PicPlateCrop.Location = New System.Drawing.Point(625, 95)
+        Me.PicPlateCrop.Name = "PicPlateCrop"
+        Me.PicPlateCrop.Size = New System.Drawing.Size(220, 65)
+        Me.PicPlateCrop.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PicPlateCrop.TabIndex = 8
+        Me.PicPlateCrop.TabStop = False
+        '
         'Label1
         '
         Me.Label1.AutoSize = True
@@ -317,5 +356,8 @@ Partial Class Form1
     Friend WithEvents textBoxID As TextBox
     Friend WithEvents btnJPEG As Button
     Friend WithEvents Btn_Exit As Button
+    Friend WithEvents LabelPlate As Label
+    Friend WithEvents TxtPlateNumber As TextBox
+    Friend WithEvents PicPlateCrop As PictureBox
     Private WithEvents RealPlayWnd As PictureBox
 End Class
